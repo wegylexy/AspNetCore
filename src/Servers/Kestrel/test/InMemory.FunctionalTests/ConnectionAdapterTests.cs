@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Microsoft.AspNetCore.Server.Kestrel.Core.Adapter;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Adapter.Internal;
 using Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTransport;
 using Microsoft.AspNetCore.Testing;
@@ -269,9 +270,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests
 
             using (var server = new TestServer(async context =>
             {
-                await context.Response.BodyPipe.WriteAsync(Encoding.ASCII.GetBytes("Hello "));
-                await context.Response.BodyPipe.FlushAsync();
-                await context.Response.BodyPipe.WriteAsync(Encoding.ASCII.GetBytes("World!"));
+                await context.Response.BodyWriter.WriteAsync(Encoding.ASCII.GetBytes("Hello "));
+                await context.Response.BodyWriter.FlushAsync();
+                await context.Response.BodyWriter.WriteAsync(Encoding.ASCII.GetBytes("World!"));
             }, serviceContext, listenOptions))
             {
                 using (var connection = server.CreateConnection())

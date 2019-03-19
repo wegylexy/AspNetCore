@@ -16,7 +16,7 @@ using Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
 {
-    public class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAborter
+    internal class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAborter
     {
         private readonly int _streamId;
         private readonly Http2FrameWriter _frameWriter;
@@ -277,6 +277,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2
         public void Complete()
         {
             // This will noop for now. See: https://github.com/aspnet/AspNetCore/issues/7370
+        }
+
+        public void Reset()
+        {
         }
 
         private async ValueTask<FlushResult> ProcessDataWrites()

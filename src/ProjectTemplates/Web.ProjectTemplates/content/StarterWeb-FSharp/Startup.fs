@@ -44,9 +44,8 @@ type Startup private () =
         app.UseRouting(fun routes ->
             routes.MapControllerRoute(
                 name = "default",
-                template = "{controller=Home}/{action=Index}/{id?}") |> ignore
-            ) |> ignore
-            routes.MapRazorPages() |> ignore
+                pattern = "{controller=Home}/{action=Index}/{id?}") |> ignore
+            routes.MapRazorPages() |> ignore) |> ignore
 
         app.UseAuthorization() |> ignore
 

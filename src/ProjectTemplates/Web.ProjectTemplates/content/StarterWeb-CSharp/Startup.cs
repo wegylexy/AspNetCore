@@ -58,7 +58,6 @@ namespace Company.WebApplication1
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
 #if (IndividualLocalAuth)
@@ -162,7 +161,7 @@ namespace Company.WebApplication1
             {
                 routes.MapControllerRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
                 routes.MapRazorPages();
             });
 
